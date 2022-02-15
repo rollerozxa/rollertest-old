@@ -15,8 +15,6 @@
 --with this program; if not, write to the Free Software Foundation, Inc.,
 --51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
--- cf. tab_local, the gamebar already provides game selection so we hide the list from here
-local hide_gamelist = PLATFORM ~= "Android"
 
 local function table_to_flags(ftable)
 	-- Convert e.g. { jungles = true, caves = false } to "jungles,nocaves"
@@ -112,7 +110,7 @@ local function create_world_formspec(dialogdata)
 	local flags = dialogdata.flags
 
 	local game, gameidx = pkgmgr.find_by_gameid(gameid)
-	if game == nil and hide_gamelist then
+	if game == nil then
 		-- should never happen but just pick the first game
 		game = pkgmgr.get_game(1)
 		gameidx = 1
@@ -329,7 +327,7 @@ local function create_world_formspec(dialogdata)
 		"label[0,2;" .. fgettext("Mapgen") .. "]"..
 		"dropdown[0,2.5;6.3;dd_mapgen;" .. mglist .. ";" .. selindex .. "]"
 
-	if not hide_gamelist or devtest_only ~= "" then
+	if devtest_only ~= "" then
 		retval = retval ..
 			"label[0,3.35;" .. fgettext("Game") .. "]"..
 			"textlist[0,3.85;5.8,"..gamelist_height..";games;" ..
@@ -362,13 +360,7 @@ local function create_world_buttonhandler(this, fields)
 		fields["key_enter"] then
 
 		local worldname = fields["te_world_name"]
-		local game, gameindex
-		if hide_gamelist then
-			game, gameindex = pkgmgr.find_by_gameid(core.settings:get("menu_last_game"))
-		else
-			gameindex = core.get_textlist_index("games")
-			game = pkgmgr.get_game(gameindex)
-		end
+		local game, gameindex = pkgmgr.find_by_gameid(core.settings:get("menu_last_game"))
 
 		local message
 		if game == nil then
