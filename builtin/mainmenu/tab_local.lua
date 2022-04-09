@@ -155,17 +155,17 @@ local function get_formspec(tabview, name, tabdata)
 	local yo = 0.45
 
 	if disabled_settings["creative_mode"] == nil then
-		creative = "checkbox[0,"..y..";cb_creative_mode;".. fgettext("Creative Mode") .. ";" ..
+		creative = "checkbox[0.2,"..y..";cb_creative_mode;".. fgettext("Creative Mode") .. ";" ..
 			dump(core.settings:get_bool("creative_mode")) .. "]"
 		y = y + yo
 	end
 	if disabled_settings["enable_damage"] == nil then
-		damage = "checkbox[0,"..y..";cb_enable_damage;".. fgettext("Enable Damage") .. ";" ..
+		damage = "checkbox[0.2,"..y..";cb_enable_damage;".. fgettext("Enable Damage") .. ";" ..
 			dump(core.settings:get_bool("enable_damage")) .. "]"
 		y = y + yo
 	end
 	if disabled_settings["enable_server"] == nil then
-		host = "checkbox[0,"..y..";cb_server;".. fgettext("Host Server") ..";" ..
+		host = "checkbox[0.2,"..y..";cb_server;".. fgettext("Host Server") ..";" ..
 			dump(core.settings:get_bool("enable_server")) .. "]"
 		y = y + yo
 	end
@@ -180,12 +180,13 @@ local function get_formspec(tabview, name, tabdata)
 			host ..
 			"textlist[3.9,0.4;7.9,3.45;sp_worlds;" ..
 			menu_render_worldlist() ..
-			";" .. index .. "]"
+			";" .. index .. "]" ..
+			"box[-0.3,-0.3;4.05,6.12;#666666]"
 
 	if core.settings:get_bool("enable_server") and disabled_settings["enable_server"] == nil then
 		retval = retval ..
-				"button[7.9,4.75;4.1,1;play;".. fgettext("Host Game") .. "]" ..
-				"checkbox[0,"..y..";cb_server_announce;" .. fgettext("Announce Server") .. ";" ..
+				"button[3.9,4.75;8.1,1;play;".. fgettext("Host Game") .. "]" ..
+				"checkbox[0.2,"..y..";cb_server_announce;" .. fgettext("Announce Server") .. ";" ..
 				dump(core.settings:get_bool("server_announce")) .. "]" ..
 				"field[0.3,2.85;3.8,0.5;te_playername;" .. fgettext("Name") .. ";" ..
 				core.formspec_escape(core.settings:get("name")) .. "]" ..
@@ -205,7 +206,7 @@ local function get_formspec(tabview, name, tabdata)
 		end
 	else
 		retval = retval ..
-				"button[7.9,4.75;4.1,1;play;" .. fgettext("Play Game") .. "]"
+				"button[3.9,4.75;8.1,1;play;" .. fgettext("Play Game") .. "]"
 	end
 
 	return retval
