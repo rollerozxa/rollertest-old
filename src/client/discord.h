@@ -19,6 +19,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 #pragma once
+
+#ifndef __ANDROID__
+
 #include <iostream>
 #include <memory>
 
@@ -46,3 +49,5 @@ private:
 };
 
 extern std::unique_ptr<Discord> g_discord;
+
+#endif
