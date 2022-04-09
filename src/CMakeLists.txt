@@ -480,6 +480,7 @@ include_directories(SYSTEM
 	${GMP_INCLUDE_DIR}
 	${JSON_INCLUDE_DIR}
 	${LUA_BIT_INCLUDE_DIR}
+	${DISCORD_INCLUDE_DIR}
 )
 
 if(USE_GETTEXT)
@@ -520,6 +521,7 @@ if(BUILD_CLIENT)
 		${GMP_LIBRARY}
 		${JSON_LIBRARY}
 		${LUA_BIT_LIBRARY}
+		${DISCORD_LIBRARY}
 		${FREETYPE_LIBRARY}
 		${PLATFORM_LIBS}
 	)
@@ -560,6 +562,9 @@ if(BUILD_CLIENT)
 	endif()
 	if (USE_REDIS)
 		target_link_libraries(${PROJECT_NAME} ${REDIS_LIBRARY})
+	endif()
+	if (USE_DISCORD)
+		target_link_libraries(${PROJECT_NAME} ${DISCORD_LIBRARY})
 	endif()
 	if (USE_PROMETHEUS)
 		target_link_libraries(${PROJECT_NAME} ${PROMETHEUS_LIBRARIES})
