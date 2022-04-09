@@ -98,7 +98,7 @@ local function create_world_formspec(dialogdata)
 			"box[0,0;12,2;" .. mt_color_orange .. "]" ..
 			"textarea[0.3,0;11.7,2;;;"..
 			fgettext("You have no games installed.") .. "\n" ..
-			fgettext("Download one from minetest.net") .. "]" ..
+			fgettext("Please install one from ContentDB.") .. "]" ..
 			"button[4.75,2.5;3,0.5;world_create_cancel;" .. fgettext("Cancel") .. "]"
 	end
 
@@ -296,17 +296,15 @@ local function create_world_formspec(dialogdata)
 
 	-- Warning if only devtest is installed
 	local devtest_only = ""
-	local gamelist_height = 2.3
 	if #pkgmgr.games == 1 and pkgmgr.games[1].id == "devtest" then
 		devtest_only = "box[0,0;5.8,1.7;#ff8800]" ..
 				"textarea[0.3,0;6,1.8;;;"..
 				fgettext("Warning: The Development Test is meant for developers.") .. "\n" ..
-				fgettext("Download a game, such as Minetest Game, from minetest.net") .. "]"
-		gamelist_height = 0.5
+				fgettext("Please go and install a game from ContentDB.") .. "]"
 	end
 
 	local retval =
-		"size[12.25,7,true]" ..
+		"size[12.25,6.25,true]" ..
 
 		-- Left side
 		"container[0,0]"..
@@ -329,10 +327,7 @@ local function create_world_formspec(dialogdata)
 
 	if devtest_only ~= "" then
 		retval = retval ..
-			"label[0,3.35;" .. fgettext("Game") .. "]"..
-			"textlist[0,3.85;5.8,"..gamelist_height..";games;" ..
-			pkgmgr.gamelist() .. ";" .. gameidx .. ";false]" ..
-			"container[0,4.5]" ..
+			"container[0,3.5]" ..
 			devtest_only ..
 			"container_end[]"
 	end
@@ -347,8 +342,8 @@ local function create_world_formspec(dialogdata)
 		"container_end[]"..
 
 		-- Menu buttons
-		"button[3.25,6.5;3,0.5;world_create_confirm;" .. fgettext("Create") .. "]" ..
-		"button[6.25,6.5;3,0.5;world_create_cancel;" .. fgettext("Cancel") .. "]"
+		"button[3.15,5.75;3,0.5;world_create_confirm;" .. fgettext("Create") .. "]" ..
+		"button[6.15,5.75;3,0.5;world_create_cancel;" .. fgettext("Cancel") .. "]"
 
 	return retval
 
@@ -424,12 +419,6 @@ local function create_world_buttonhandler(this, fields)
 
 	this.data.worldname = fields["te_world_name"]
 	this.data.seed = fields["te_seed"] or ""
-
-	if fields["games"] then
-		local gameindex = core.get_textlist_index("games")
-		core.settings:set("menu_last_game", pkgmgr.games[gameindex].id)
-		return true
-	end
 
 	for k,v in pairs(fields) do
 		local split = string.split(k, "_", nil, 3)
