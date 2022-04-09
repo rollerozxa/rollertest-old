@@ -236,3 +236,16 @@ function menu_worldmt_legacy(selected)
 		end
 	end
 end
+
+-- Simple formspec wrapper that does variable substitution.
+function formspec_wrapper(formspec, variables)
+	local retval = formspec
+
+	for k,v in pairs(variables) do
+		retval = retval:gsub("${"..k.."}", v)
+	end
+
+	print(retval)
+
+	return retval
+end
