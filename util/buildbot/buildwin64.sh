@@ -132,6 +132,7 @@ cmake -S $sourcedir -B build \
 	\
 	-DCMAKE_PREFIX_PATH=$libdir/irrlicht \
 	-DIRRLICHT_DLL="$irr_dlls" \
+	-DIRRLICHTMT_FORCE_BINARY=1 \
 	\
 	-DZLIB_INCLUDE_DIR=$libdir/zlib/include \
 	-DZLIB_LIBRARY=$libdir/zlib/lib/libz.dll.a \
