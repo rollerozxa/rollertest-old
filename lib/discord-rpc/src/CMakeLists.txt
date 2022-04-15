@@ -123,25 +123,3 @@ endif(${BUILD_SHARED_LIBS})
 if (CLANG_FORMAT_CMD)
     add_dependencies(discord-rpc clangformat)
 endif(CLANG_FORMAT_CMD)
-
-# install
-
-install(
-    TARGETS discord-rpc
-    EXPORT "discord-rpc"
-    RUNTIME
-        DESTINATION "${CMAKE_INSTALL_BINDIR}"
-    LIBRARY
-        DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-    ARCHIVE
-        DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-    INCLUDES
-        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
-)
-
-install(
-    FILES
-        "../include/discord_rpc.h"
-		"../include/discord_register.h"
-    DESTINATION "include"
-)
