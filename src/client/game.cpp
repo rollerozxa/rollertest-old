@@ -910,11 +910,11 @@ private:
 	int m_reset_HW_buffer_counter = 0;
 #ifdef HAVE_TOUCHSCREENGUI
 	bool m_cache_hold_aux1;
+	bool m_android_touchtarget;
+	bool m_android_use_crosshair;
 #endif
 #ifdef __ANDROID__
 	bool m_android_chat_open;
-	bool m_android_touchtarget;
-	bool m_android_use_crosshair;
 #endif
 };
 
