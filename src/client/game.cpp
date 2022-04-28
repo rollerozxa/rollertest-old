@@ -907,7 +907,9 @@ private:
 
 	bool m_does_lost_focus_pause_game = false;
 
+#if IRRLICHT_VERSION_MT_REVISION < 5
 	int m_reset_HW_buffer_counter = 0;
+#endif
 #ifdef HAVE_TOUCHSCREENGUI
 	bool m_cache_hold_aux1;
 	bool m_android_touchtarget;
@@ -4001,6 +4003,7 @@ void Game::updateFrame(ProfilerGraph *graph, RunStats *stats, f32 dtime,
 	/*
 		==================== End scene ====================
 	*/
+#if IRRLICHT_VERSION_MT_REVISION < 5
 	if (++m_reset_HW_buffer_counter > 500) {
 		/*
 		  Periodically remove all mesh HW buffers.
@@ -4022,6 +4025,7 @@ void Game::updateFrame(ProfilerGraph *graph, RunStats *stats, f32 dtime,
 		driver->removeAllHardwareBuffers();
 		m_reset_HW_buffer_counter = 0;
 	}
+#endif
 
 	driver->endScene();
 
