@@ -394,6 +394,7 @@ local function parse_config_file(read_all, parse_mods)
 				end
 
 				table.insert(settings, {
+					name = mod.name,
 					readable_name = mod.title,
 					level = 1,
 					type = "category",
