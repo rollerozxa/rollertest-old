@@ -251,10 +251,10 @@ local function create_world_formspec(dialogdata)
 		end
 		y = y + 0.3
 
-		form = form .. "label[0,"..(y+0.1)..";" .. fgettext("Biomes") .. "]"
-		y = y + 0.6
+		form = form .. "container_end[]container[0,3.5]"..
+			"label[0,0;" .. fgettext("Biomes") .. "]"
 
-		form = form .. "dropdown[0,"..y..";6.3;mgv6_biomes;"
+		form = form .. "dropdown[0,0.4;6.3;mgv6_biomes;"
 		for b=1, #mgv6_biomes do
 			form = form .. mgv6_biomes[b][1]
 			if b < #mgv6_biomes then
@@ -264,8 +264,7 @@ local function create_world_formspec(dialogdata)
 		form = form .. ";" .. biometype.. "]"
 
 		-- biomeblend
-		y = y + 0.55
-		form = form .. "checkbox[0,"..y..";flag_v6_biomeblend;" ..
+		form = form .. "checkbox[0,1;flag_v6_biomeblend;" ..
 			fgettext("Biome blending") .. ";"..strflag(flags.v6, "biomeblend").."]" ..
 			"tooltip[flag_v6_biomeblend;" ..
 			fgettext("Smooth transition between biomes") .. "]"
@@ -294,14 +293,14 @@ local function create_world_formspec(dialogdata)
 	-- Warning if only devtest is installed
 	local devtest_only = ""
 	if #pkgmgr.games == 1 and pkgmgr.games[1].id == "devtest" then
-		devtest_only = "box[0,0;5.8,1.7;#ff8800]" ..
-				"textarea[0.3,0;6,1.8;;;"..
-				fgettext("Warning: The Development Test is meant for developers.") .. "\n" ..
+		devtest_only = "box[0,0;5.8,1;#ff8800]" ..
+				"textarea[0.3,0;6,1;;;"..
+				fgettext("Development Test is meant for developers.") .. "\n" ..
 				fgettext("Please go and install a game from ContentDB.") .. "]"
 	end
 
 	local retval =
-		"size[12.25,6.25,true]" ..
+		"size[12.25,6,true]" ..
 
 		-- Left side
 		"container[0,0]"..
@@ -339,8 +338,8 @@ local function create_world_formspec(dialogdata)
 		"container_end[]"..
 
 		-- Menu buttons
-		"button[3.15,5.75;3,0.5;world_create_confirm;" .. fgettext("Create") .. "]" ..
-		"button[6.15,5.75;3,0.5;world_create_cancel;" .. fgettext("Cancel") .. "]"
+		"button[3.15,5.5;3,0.5;world_create_confirm;" .. fgettext("Create") .. "]" ..
+		"button[6.15,5.5;3,0.5;world_create_cancel;" .. fgettext("Cancel") .. "]"
 
 	return retval
 
