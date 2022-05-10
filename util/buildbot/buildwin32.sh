@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-CORE_GIT=https://github.com/minetest/minetest
+CORE_GIT=https://github.com/rollerozxa/rollertest
 CORE_BRANCH=master
 CORE_NAME=minetest
 GAME_GIT=https://github.com/minetest/minetest_game
@@ -83,7 +83,7 @@ download () {
 # this distinction should be gotten rid of next time
 
 cd $libdir
-download "https://github.com/minetest/irrlicht/releases/download/$irrlicht_version/win32-dw2.zip" irrlicht-$irrlicht_version.zip
+download "https://github.com/minetest/irrlicht/releases/download/$irrlicht_version/win32.zip" irrlicht-$irrlicht_version.zip
 download "http://minetest.kitsunemimi.pw/dw2/zlib-$zlib_version-win32.zip"
 download "http://minetest.kitsunemimi.pw/zstd-$zstd_version-win32.zip"
 download "http://minetest.kitsunemimi.pw/libogg-$ogg_version-win32.zip"
@@ -124,9 +124,9 @@ gettext_dlls=$(echo $libdir/gettext/bin/lib{intl,iconv}-*.dll | tr ' ' ';')
 cmake -S $sourcedir -B build \
 	-DCMAKE_TOOLCHAIN_FILE=$toolchain_file \
 	-DCMAKE_INSTALL_PREFIX=/tmp \
-	-DVERSION_EXTRA=$git_hash \
+	-DVERSION_EXTRA="rollertest" \
 	-DBUILD_CLIENT=1 -DBUILD_SERVER=0 \
-	-DEXTRA_DLL="$runtime_dlls" \
+	-DEXTRA_DLL="$runtime_dlls" -DBUILD_UNITTESTS=0 \
 	\
 	-DENABLE_SOUND=1 \
 	-DENABLE_CURL=1 \

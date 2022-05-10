@@ -109,14 +109,11 @@ local function create_world_formspec(dialogdata)
 
 	local flags = dialogdata.flags
 
-	local game, gameidx = pkgmgr.find_by_gameid(gameid)
+	local game = pkgmgr.find_by_gameid(gameid)
 	if game == nil then
 		-- should never happen but just pick the first game
 		game = pkgmgr.get_game(1)
-		gameidx = 1
 		core.settings:set("menu_last_game", game.id)
-	elseif game == nil then
-		gameidx = 0
 	end
 
 	local disallowed_mapgen_settings = {}
