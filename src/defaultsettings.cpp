@@ -481,7 +481,7 @@ void set_default_settings()
 	settings->setDefault("emergequeue_limit_generate", "16");
 	settings->setDefault("max_block_generate_distance", "5");
 	settings->setDefault("enable_3d_clouds", "false");
-	settings->setDefault("fps_max", "30");
+	settings->setDefault("fps_max", "60");
 	settings->setDefault("fps_max_unfocused", "10");
 	settings->setDefault("sqlite_synchronous", "1");
 	settings->setDefault("map_compression_level_disk", "-1");
