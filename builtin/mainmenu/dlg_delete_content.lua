@@ -18,15 +18,10 @@
 --------------------------------------------------------------------------------
 
 local function delete_content_formspec(dialogdata)
-	local retval =
-		"size[10,2.5,true]" ..
-		"label[0.5,0.5;" ..
-		fgettext("Are you sure you want to delete \"$1\"?", dialogdata.content.name) .. "]" ..
-		"style[dlg_delete_content_confirm;bgcolor=red]" ..
-		"button[0.5,1.5;2.5,0.5;dlg_delete_content_confirm;" .. fgettext("Delete") .. "]" ..
-		"button[7.0,1.5;2.5,0.5;dlg_delete_content_cancel;" .. fgettext("Cancel") .. "]"
-
-	return retval
+	return confirmation_formspec(
+		fgettext("Are you sure you want to delete \"$1\"?", dialogdata.content.name),
+		'dlg_delete_content_confirm', fgettext("Delete"),
+		'dlg_delete_content_cancel', fgettext("Cancel"))
 end
 
 --------------------------------------------------------------------------------
