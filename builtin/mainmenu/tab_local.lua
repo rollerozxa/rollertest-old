@@ -87,6 +87,7 @@ function singleplayer_refresh_gamebar()
 		local text = nil
 		local tooltip = core.formspec_escape(game.title)
 
+
 		if (game.menuicon_path or "") ~= "" then
 			image = core.formspec_escape(game.menuicon_path)
 		else
