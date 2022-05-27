@@ -440,6 +440,7 @@ void Server::init()
 
 	m_script->loadMod(getBuiltinLuaPath() + DIR_DELIM "init.lua", BUILTIN_MOD_NAME);
 
+	m_gamespec.checkAndLog();
 	m_modmgr->loadMods(m_script);
 
 	// Read Textures and calculate sha1 sums
@@ -1804,7 +1805,7 @@ void Server::SendSetLighting(session_t peer_id, const Lighting &lighting)
 {
 	NetworkPacket pkt(TOCLIENT_SET_LIGHTING,
 			4, peer_id);
-	
+
 	pkt << lighting.shadow_intensity;
 
 	Send(&pkt);
@@ -3109,7 +3110,7 @@ std::string Server::getStatusString()
 	// Version
 	os << "version: " << g_version_string;
 	// Game
-	os << " | game: " << (m_gamespec.name.empty() ? m_gamespec.id : m_gamespec.name);
+	os << " | game: " << (m_gamespec.title.empty() ? m_gamespec.id : m_gamespec.title);
 	// Uptime
 	os << " | uptime: " << duration_to_string((int) m_uptime_counter->get());
 	// Max lag estimate
@@ -3291,7 +3292,7 @@ bool Server::hudSetFlags(RemotePlayer *player, u32 flags, u32 mask)
 	u32 new_hud_flags = (player->hud_flags & ~mask) | flags;
 	if (new_hud_flags == player->hud_flags) // no change
 		return true;
-	
+
 	SendHUDSetFlags(player->getPeerId(), flags, mask);
 	player->hud_flags = new_hud_flags;
 

@@ -62,7 +62,8 @@ Where `<gameid>` is unique to each game.
 The game directory can contain the following files:
 
 * `game.conf`, with the following keys:
-    * `name`: Required, a human readable title to address the game, e.g. `name = Minetest`.
+    * `title`: Required, a human-readable title to address the game, e.g. `title = Minetest Game`.
+    * `name`: (Deprecated) same as title.
     * `description`: Short description to be shown in the content tab
     * `allowed_mapgens = <comma-separated mapgens>`
       e.g. `allowed_mapgens = v5,v6,flat`
@@ -4703,6 +4704,8 @@ Utilities
           abm_min_max_y = true,
           -- dynamic_add_media supports passing a table with options (5.5.0)
           dynamic_add_media_table = true,
+          -- allows get_sky to return a table instead of separate values (5.6.0)
+          get_sky_as_table = true,
       }
 
 * `minetest.has_feature(arg)`: returns `boolean, missing_features`
@@ -7001,9 +7004,15 @@ object you are working with still exists.
         * `"plain"`: Uses 0 textures, `bgcolor` used
     * `clouds`: Boolean for whether clouds appear in front of `"skybox"` or
       `"plain"` custom skyboxes (default: `true`)
-* `get_sky()`: returns base_color, type, table of textures, clouds.
-* `get_sky_color()`: returns a table with the `sky_color` parameters as in
-    `set_sky`.
+* `get_sky(as_table)`:
+    * `as_table`: boolean that determines whether the deprecated version of this
+    function is being used.
+        * `true` returns a table containing sky parameters as defined in `set_sky(sky_parameters)`.
+        * Deprecated: `false` or `nil` returns base_color, type, table of textures,
+        clouds.
+* `get_sky_color()`:
+    * Deprecated: Use `get_sky(as_table)` instead.
+    * returns a table with the `sky_color` parameters as in `set_sky`.
 * `set_sun(sun_parameters)`:
     * Passing no arguments resets the sun to its default values.
     * `sun_parameters` is a table with the following optional fields:
@@ -7088,7 +7097,6 @@ object you are working with still exists.
     * `light_definition` is a table with the following optional fields:
       * `shadows` is a table that controls ambient shadows
         * `intensity` sets the intensity of the shadows from 0 (no shadows, default) to 1 (blackness)
-    * Returns true on success.
 * `get_lighting()`: returns the current state of lighting for the player.
     * Result is a table with the same fields as `light_definition` in `set_lighting`.
 

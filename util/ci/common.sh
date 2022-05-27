@@ -7,9 +7,8 @@ install_linux_deps() {
 		libhiredis-dev libogg-dev libgmp-dev libvorbis-dev libopenal-dev \
 		gettext libpq-dev libleveldb-dev libcurl4-openssl-dev libzstd-dev)
 
-	if [[ "$1" == "--old-irr" ]]; then
+	if [[ "$1" == "--no-irr" ]]; then
 		shift
-		pkgs+=(libirrlicht-dev)
 	else
 		wget "https://github.com/minetest/irrlicht/releases/download/1.9.0mt6/ubuntu-bionic.tar.gz"
 		sudo tar -xaf ubuntu-bionic.tar.gz -C /usr/local
