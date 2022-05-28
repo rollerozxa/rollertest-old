@@ -51,7 +51,7 @@ struct SubgameSpec
 			const std::string &menuicon_path = "",
 			const std::string &author = "", int release = 0) :
 			id(id),
-			title(name), author(author), release(release), path(path),
+			title(title), author(author), release(release), path(path),
 			gamemods_path(gamemods_path), addon_mods_paths(addon_mods_paths),
 			menuicon_path(menuicon_path)
 	{
