@@ -193,10 +193,10 @@ void set_default_settings()
 	settings->setDefault("texture_path", "");
 	settings->setDefault("shader_path", "");
 #if ENABLE_GLES
-#ifdef _IRR_COMPILE_WITH_OGLES1_
-	settings->setDefault("video_driver", "ogles1");
-#else
+#ifdef _IRR_COMPILE_WITH_OGLES2_
 	settings->setDefault("video_driver", "ogles2");
+#else
+	settings->setDefault("video_driver", "ogles1");
 #endif
 #else
 	settings->setDefault("video_driver", "opengl");
@@ -234,11 +234,7 @@ void set_default_settings()
 	settings->setDefault("texture_clean_transparent", "false");
 	settings->setDefault("texture_min_size", "64");
 	settings->setDefault("ambient_occlusion_gamma", "1.8");
-#if ENABLE_GLES
-	settings->setDefault("enable_shaders", "false");
-#else
 	settings->setDefault("enable_shaders", "true");
-#endif
 	settings->setDefault("enable_particles", "true");
 	settings->setDefault("arm_inertia", "true");
 	settings->setDefault("show_nametag_backgrounds", "true");
@@ -479,7 +475,6 @@ void set_default_settings()
 	settings->setDefault("emergequeue_limit_generate", "16");
 	settings->setDefault("max_block_generate_distance", "5");
 	settings->setDefault("enable_3d_clouds", "false");
-	settings->setDefault("fps_max", "60");
 	settings->setDefault("fps_max_unfocused", "10");
 	settings->setDefault("sqlite_synchronous", "1");
 	settings->setDefault("map_compression_level_disk", "-1");
@@ -487,9 +482,10 @@ void set_default_settings()
 	settings->setDefault("server_map_save_interval", "15");
 	settings->setDefault("client_mapblock_limit", "1000");
 	settings->setDefault("active_block_range", "2");
-	settings->setDefault("viewing_range", "50");
+	settings->setDefault("viewing_range", "90");
 	settings->setDefault("leaves_style", "simple");
 	settings->setDefault("curl_verify_cert","false");
+	settings->setDefault("transparency_sorting_distance", "1");
 
 	// Apply settings according to screen size
 	float x_inches = (float) porting::getDisplaySize().X /
