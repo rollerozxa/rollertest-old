@@ -310,16 +310,20 @@ local function create_world_formspec(dialogdata)
 		"set_focus[te_world_name;false]"
 
 	if not disallowed_mapgen_settings["seed"] then
-
 		retval = retval .. "field[0.3,1.7;6,0.5;te_seed;" ..
 				fgettext("Seed") ..
 				";".. core.formspec_escape(dialogdata.seed) .. "]"
-
 	end
 
-	retval = retval ..
-		"label[0,2;" .. fgettext("Mapgen") .. "]"..
-		"dropdown[0,2.5;6.3;dd_mapgen;" .. mglist .. ";" .. selindex .. "]"
+	if #mapgens == 1 then
+		retval = retval ..
+			"dropdown[-10,2.5;6.3;dd_mapgen;"..mglist..";"..selindex.."]"
+	else
+		retval = retval ..
+			"label[0,2;" .. fgettext("Mapgen") .. "]"..
+			"dropdown[0,2.5;6.3;dd_mapgen;" .. mglist .. ";" .. selindex .. "]"
+	end
+
 
 	if devtest_only ~= "" then
 		retval = retval ..
