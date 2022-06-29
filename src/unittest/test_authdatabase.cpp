@@ -107,7 +107,7 @@ void TestAuthDatabase::runTests(IGameDef *gamedef)
 
 	rawstream << "-------- SQLite3 database (same object)" << std::endl;
 
-	auth_db = new AuthDatabaseSQLite3(test_dir);
+	AuthDatabase *auth_db = new AuthDatabaseSQLite3(test_dir);
 	auth_provider = new FixedProvider(auth_db);
 
 	runTestsForCurrentDB();
